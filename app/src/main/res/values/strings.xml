@@ -5,7 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="cardview_content">This is card</string>
+    <string name="cardview_primary_content">26°C</string>
+    <string name="cardview_secondary_content">55°F</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

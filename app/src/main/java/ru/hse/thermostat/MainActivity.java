@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.current_temperature_container, CurrentTemperature.newInstance())
+                    .add(R.id.next_temperature_container, CurrentTemperature.newInstance())
                     .commit();
         }
     }
