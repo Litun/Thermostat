@@ -7,4 +7,6 @@
     <dimen name="main_fahrenheit_font_size">32sp</dimen>
     <dimen name="stored_temperature_font_size">32sp</dimen>
     <dimen name="stored_temperature_title_font_size">24sp</dimen>
+
+    <dimen name="schedule_title_font_size">16sp</dimen>
 </resources>

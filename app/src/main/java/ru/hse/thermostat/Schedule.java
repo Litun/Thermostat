@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Schedule extends Fragment {
+    private TemperatureTextView mDayTemperature;
+    private TemperatureTextView mNightTemperature;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -91,5 +94,18 @@ public class Schedule extends Fragment {
 //        // TODO: Update argument type and name
 //        public void onFragmentInteraction(Uri uri);
 //    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mDayTemperature = (TemperatureTextView) view.findViewById(R.id.day_temperature);
+        mDayTemperature.setFahrenheit(false);
+        mDayTemperature.setTemperature(28.4f);
+        mNightTemperature = (TemperatureTextView) view.findViewById(R.id.night_temperature);
+        mNightTemperature.setFahrenheit(false);
+        mNightTemperature.setTemperature(26.1f);
+//        mCardView.setRadius(1f);
+//        mCardView.setCardElevation(10);
+    }
 
 }

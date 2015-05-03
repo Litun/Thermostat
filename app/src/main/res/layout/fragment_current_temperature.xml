@@ -31,21 +31,21 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-                <TextView
+                <ru.hse.thermostat.TemperatureTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/night_temperature_celsius"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:id="@+id/celsius"
+                    android:id="@+id/main_celsius"
                     android:textSize="@dimen/main_celsius_font_size"
                     android:layout_marginTop="100dp" />
 
-                <TextView
+                <ru.hse.thermostat.TemperatureTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/night_temperature_fahrenheit"
                     android:layout_gravity="top|center_horizontal"
-                    android:id="@+id/fahrenheit"
+                    android:id="@+id/main_fahrenheit"
                     android:textSize="@dimen/main_fahrenheit_font_size"
                     android:layout_marginBottom="100dp" />
             </LinearLayout>

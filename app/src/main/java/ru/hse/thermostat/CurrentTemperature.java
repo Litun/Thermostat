@@ -22,8 +22,8 @@ import android.widget.TextView;
 public class CurrentTemperature extends Fragment {
 
     CardView mCardView;
-    TextView mCelsiusText;
-    TextView mFahrenheitText;
+    TemperatureTextView mCelsiusText;
+    TemperatureTextView mFahrenheitText;
 
     public static CurrentTemperature newInstance() {
         CurrentTemperature fragment = new CurrentTemperature();
@@ -61,8 +61,12 @@ public class CurrentTemperature extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mCardView = (CardView) view.findViewById(R.id.cardview);
-        mCelsiusText = (TextView) view.findViewById(R.id.celsius);
-        mFahrenheitText = (TextView) view.findViewById(R.id.fahrenheit);
+        mCelsiusText = (TemperatureTextView) view.findViewById(R.id.main_celsius);
+        mCelsiusText.setFahrenheit(false);
+        mCelsiusText.setTemperature(26.1f);
+        mFahrenheitText = (TemperatureTextView) view.findViewById(R.id.main_fahrenheit);
+        mFahrenheitText.setFahrenheit(true);
+        mFahrenheitText.setTemperature(mCelsiusText);
 //        mCardView.setRadius(1f);
 //        mCardView.setCardElevation(10);
     }

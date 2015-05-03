@@ -4,6 +4,7 @@
     <string name="app_name">Thermostat</string>
     <string name="day">Day</string>
     <string name="night">Night</string>
+    <string name="switches_title">Day temperature switches</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
