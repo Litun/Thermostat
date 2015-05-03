@@ -2,11 +2,15 @@
 <resources>
 
     <string name="app_name">Thermostat</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="cardview_primary_content">26°C</string>
-    <string name="cardview_secondary_content">55°F</string>
+    <string name="night_temperature_celsius">26.1°C</string>
+    <string name="night_temperature_fahrenheit">55.8°F</string>
+    <string name="day_temperature_celsius">28.4°C</string>
+    <string name="day_temperature_fahrenheit">60.9°F</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="screen_array">
         <item>Current temperature</item>

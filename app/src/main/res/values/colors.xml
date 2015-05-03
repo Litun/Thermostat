@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="cardview_initial_background">#ff8d9cde</color>
+    <color name="day_cardview_background">#ffde8ea4</color>
+    <color name="night_cardview_background">#ff8d9cde</color>
     <color name="select_item_background">#ffcecece</color>
     <color name="blue">#ff18ded7</color>
 

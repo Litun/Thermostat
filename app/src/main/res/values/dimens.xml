@@ -5,4 +5,6 @@
     <dimen name="just_dimention">10dp</dimen>
     <dimen name="main_celsius_font_size">64sp</dimen>
     <dimen name="main_fahrenheit_font_size">32sp</dimen>
+    <dimen name="stored_temperature_font_size">32sp</dimen>
+    <dimen name="stored_temperature_title_font_size">24sp</dimen>
 </resources>
