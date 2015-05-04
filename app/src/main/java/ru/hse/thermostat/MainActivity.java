@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     private ListView mDrawerList;
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
+    //private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 
         setActionBar(toolbar);
 
-        mTitle = mDrawerTitle = getTitle();
+        mTitle = getTitle();
         mScreenTitles = getResources().getStringArray(R.array.screen_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -80,9 +80,6 @@ public class MainActivity extends Activity {
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//        menu.findItem(R.id.).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

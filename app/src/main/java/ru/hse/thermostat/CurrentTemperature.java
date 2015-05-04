@@ -1,23 +1,16 @@
 package ru.hse.thermostat;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CurrentTemperature.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CurrentTemperature#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class CurrentTemperature extends Fragment {
 
@@ -47,9 +40,7 @@ public class CurrentTemperature extends Fragment {
         return inflater.inflate(R.layout.fragment_current_temperature, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-
     }
 
     @Override
@@ -67,7 +58,5 @@ public class CurrentTemperature extends Fragment {
         mFahrenheitText = (TemperatureTextView) view.findViewById(R.id.main_fahrenheit);
         mFahrenheitText.setFahrenheit(true);
         mFahrenheitText.setTemperature(mCelsiusText);
-//        mCardView.setRadius(1f);
-//        mCardView.setCardElevation(10);
     }
 }
