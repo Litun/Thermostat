@@ -1,12 +1,13 @@
 package ru.hse.thermostat;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,10 +16,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private String[] mScreenTitles;
     private DrawerLayout mDrawerLayout;
@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        setActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         mTitle = getTitle();
         mScreenTitles = getResources().getStringArray(R.array.screen_array);
@@ -48,8 +48,8 @@ public class MainActivity extends Activity {
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -67,7 +67,6 @@ public class MainActivity extends Activity {
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,7 +134,7 @@ public class MainActivity extends Activity {
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(mTitle);
     }
 
     /**
