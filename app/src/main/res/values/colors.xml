@@ -5,5 +5,6 @@
     <color name="night_cardview_background">#ff8d9cde</color>
     <color name="select_item_background">#ffcecece</color>
     <color name="blue">#ff18ded7</color>
+    <color name="primary">#2196F3</color>
 
 </resources>

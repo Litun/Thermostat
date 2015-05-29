@@ -1,95 +1,96 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ru.hse.thermostat.ScheduleFragment">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView">
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
 
                 <android.support.v7.widget.CardView
-                    android:layout_weight="1"
                     android:id="@+id/night_temperature_cardview"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/just_dimention"
+                    android:layout_weight="1"
+                    android:focusable="false"
                     card_view:cardBackgroundColor="@color/night_cardview_background"
                     card_view:cardCornerRadius="1dp"
-                    card_view:cardElevation="5dp"
-                    android:layout_margin="@dimen/just_dimention"
-                    android:focusable="false">
+                    card_view:cardElevation="5dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/night"
                             android:layout_gravity="top|center_horizontal"
-                            android:textSize="@dimen/stored_temperature_title_font_size"
-                            android:layout_marginTop="30dp" />
+                            android:layout_marginTop="30dp"
+                            android:text="@string/night"
+                            android:textSize="@dimen/stored_temperature_title_font_size" />
 
                         <ru.hse.thermostat.TemperatureTextView
+                            android:id="@+id/night_temperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/night_temperature_celsius"
                             android:layout_gravity="bottom|center_horizontal"
-                            android:id="@+id/night_temperature"
-                            android:textSize="@dimen/stored_temperature_font_size"
-                            android:layout_margin="30dp" />
+                            android:layout_margin="30dp"
+                            android:text="@string/night_temperature_celsius"
+                            android:textSize="@dimen/stored_temperature_font_size" />
 
 
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:layout_weight="1"
                     android:id="@+id/day_temperature_cardview"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/just_dimention"
+                    android:layout_weight="1"
+                    android:focusable="false"
                     card_view:cardBackgroundColor="@color/day_cardview_background"
                     card_view:cardCornerRadius="1dp"
-                    card_view:cardElevation="5dp"
-                    android:layout_margin="@dimen/just_dimention"
-                    android:focusable="false">
+                    card_view:cardElevation="5dp">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/day"
                             android:layout_gravity="top|center_horizontal"
-                            android:textSize="@dimen/stored_temperature_title_font_size"
-                            android:layout_marginTop="30dp" />
+                            android:layout_marginTop="30dp"
+                            android:text="@string/day"
+                            android:textSize="@dimen/stored_temperature_title_font_size" />
 
                         <ru.hse.thermostat.TemperatureTextView
+                            android:id="@+id/day_temperature"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/day_temperature_celsius"
                             android:layout_gravity="bottom|center_horizontal"
-                            android:id="@+id/day_temperature"
-                            android:textSize="@dimen/stored_temperature_font_size"
-                            android:layout_margin="30dp" />
+                            android:layout_margin="30dp"
+                            android:text="@string/day_temperature_celsius"
+                            android:textSize="@dimen/stored_temperature_font_size" />
 
 
                     </LinearLayout>
@@ -99,10 +100,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/switches_title"
                 android:layout_gravity="top|center_horizontal"
-                android:textSize="@dimen/schedule_title_font_size"
-                android:layout_margin="5dp" />
+                android:layout_margin="5dp"
+                android:text="@string/switches_title"
+                android:textSize="@dimen/schedule_title_font_size" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 

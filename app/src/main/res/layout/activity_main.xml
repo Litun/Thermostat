@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/actionBarSize"
+        android:background="@color/primary"
         android:elevation="10dp"/>
     <!--android:background="?android:attr/colorPrimary"-->
     <android.support.v4.widget.DrawerLayout

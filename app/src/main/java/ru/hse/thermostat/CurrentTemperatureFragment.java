@@ -58,5 +58,7 @@ public class CurrentTemperatureFragment extends Fragment {
         mFahrenheitText = (TemperatureTextView) view.findViewById(R.id.main_fahrenheit);
         mFahrenheitText.setFahrenheit(true);
         mFahrenheitText.setTemperature(mCelsiusText);
+
+
     }
 }

@@ -22,6 +22,10 @@ public class Schedule {
         return storage;
     }
 
+    public int size() {
+        return storage.size();
+    }
+
     static class Interval {
         final int weekday;
         long minutesFrom,
