@@ -1,65 +1,52 @@
 package ru.hse.thermostat;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Litun on 28.05.2015.
  */
-public class Schedule extends Fragment {
-    private TemperatureTextView mDayTemperature;
-    private TemperatureTextView mNightTemperature;
-
-    public static Schedule newInstance() {
-        Schedule fragment = new Schedule();
-        return fragment;
-    }
+public class Schedule {
+    final private List<Interval> storage;
 
     public Schedule() {
-        // Required empty public constructor
+        //long days = TimeUnit.MILLISECONDS.toDays(milliseconds);
+        storage = new ArrayList<Interval>(5);
+        storage.add(new Interval(0,60,70));
+        storage.add(new Interval(1,60,70));
+        storage.add(new Interval(1,160,170));
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public List<Interval> getStorage() {
+        return storage;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
+    static class Interval {
+        final int weekday;
+        long minutesFrom,
+                minutesTo;
+        boolean active = true;
+
+        Interval(int weekday, long minutesFrom, long minutesTo) {
+            this.weekday = weekday;
+            this.minutesFrom = minutesFrom;
+            this.minutesTo = minutesTo;
+        }
+
+        long getMinutesFrom(){
+            return TimeUnit.MINUTES.toMinutes(minutesFrom);
+        }
+        long getHoursFrom(){
+            return TimeUnit.MINUTES.toHours(minutesFrom);
+        }
+        long getMinutesTo(){
+            return TimeUnit.MINUTES.toMinutes(minutesTo);
+        }
+        long getHoursTo(){
+            return TimeUnit.MINUTES.toHours(minutesTo);
+        }
     }
-
-    public void onButtonPressed(Uri uri) {
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mDayTemperature = (TemperatureTextView) view.findViewById(R.id.day_temperature);
-        mDayTemperature.setFahrenheit(false);
-        mDayTemperature.setTemperature(28.4f);
-        mNightTemperature = (TemperatureTextView) view.findViewById(R.id.night_temperature);
-        mNightTemperature.setFahrenheit(false);
-        mNightTemperature.setTemperature(26.1f);
-    }
-
 }
+
+

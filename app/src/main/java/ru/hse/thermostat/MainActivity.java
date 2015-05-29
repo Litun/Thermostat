@@ -106,10 +106,10 @@ public class MainActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new CurrentTemperature();
+                fragment = new CurrentTemperatureFragment();
                 break;
             case 1:
-                fragment = new Schedule();
+                fragment = new ScheduleFragment();
                 break;
             default:
                 break;
