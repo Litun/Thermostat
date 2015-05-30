@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.melnykov.fab.FloatingActionButton;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +57,10 @@ public class ScheduleFragment extends Fragment {
         ScheduleAdapter adapter = new ScheduleAdapter(schedule);
         recyclerView.setAdapter(adapter);
         setSwipeDel(adapter);
+
+        //bind plus button
+        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.plus_button);
+        fab.attachToRecyclerView(recyclerView);
     }
 
     private void setSwipeDel(final ScheduleAdapter adapter) {
