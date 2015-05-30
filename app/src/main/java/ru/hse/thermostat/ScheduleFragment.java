@@ -2,6 +2,8 @@ package ru.hse.thermostat;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -111,4 +113,13 @@ public class ScheduleFragment extends Fragment {
         mNightTemperature.setTemperature(26.1f);
     }
 
+
+    public final String PREF_NAME = "Thermostat",
+            SCHEDULE_KEY = "schedule";
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SharedPreferences preferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        preferences.edit().putString(SCHEDULE_KEY , schedule.toJson()).apply();
+    }
 }

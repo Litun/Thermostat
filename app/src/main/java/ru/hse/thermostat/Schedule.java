@@ -1,5 +1,7 @@
 package ru.hse.thermostat;
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +25,12 @@ public class Schedule {
         storage.add(new Interval(5, 280, 1210));
     }
 
+    public Schedule(String json) {
+        Gson gson = new Gson();
+        Schedule s = gson.fromJson(json, Schedule.class);
+        storage = s.getStorage();
+    }
+
     public List<Interval> getStorage() {
         return storage;
     }
@@ -35,8 +43,13 @@ public class Schedule {
         return storage.get(i).active;
     }
 
-    public void remove(int i){
+    public void remove(int i) {
         storage.remove(i);
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 
     public int size() {
