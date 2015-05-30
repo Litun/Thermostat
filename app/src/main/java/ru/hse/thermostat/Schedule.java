@@ -116,6 +116,49 @@ public class Schedule {
         Collections.sort(storage);
     }
 
+    public boolean isActive(Date date)
+    {
+        long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
+        date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
+
+            for (Interval interval : storage) {
+                if (interval.weekday == DateDay) {
+                    if (interval.active && date.after(interval.from) && date.before(interval.to)) {
+                        return true;
+                    }
+                }
+            }
+
+        return false;
+    }
+
+    public Date nextChange(Date date)
+    {
+        long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
+        date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
+
+        for (Interval interval : storage) {
+            if (interval.active && (interval.weekday > DateDay)) {
+                return interval.from;
+            }
+
+            if (interval.weekday == DateDay) {
+                if (interval.active && date.before(interval.from)) {
+                    return interval.from;
+                }
+            }
+        }
+
+        for (Interval interval : storage) {
+            if (interval.active) {
+                return interval.from;
+            }
+        }
+
+        return null;
+    }
+
+
     static class Interval implements Comparable<Interval> {
         final int weekday;
         Date from, to;
