@@ -3,14 +3,15 @@ package ru.hse.thermostat;
 import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -67,16 +68,37 @@ public class CurrentTemperatureFragment extends Fragment {
 
         //timer
         final TextView clock = (TextView) view.findViewById(R.id.clock);
+//
+//        TimerListener timerListener = new TimerListener() {
+//            @Override
+//            synchronized
+//            public void timeChanged(Date time) {
+//                SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
+//                clock.setText(dateFormatter.format(time));
+//            }
+//        };
+//        MyApplication application = (MyApplication) getActivity().getApplication();
+//        application.setTimer(timerListener);
 
-        TimerListener timerListener = new TimerListener() {
+        Timer myTimer = new Timer(); // Создаем таймер
+        final Handler uiHandler = new Handler();
+        //final TextView txtResult = (TextView)view.findViewById(R.id.txtResult);
+        myTimer.schedule(new TimerTask() { // Определяем задачу
+            Integer a = 0;
+
             @Override
-            synchronized 
-            public void timeChanged(Date time) {
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
-                clock.setText(dateFormatter.format(time));
+            public void run() {
+                //final String result = doLongAndComplicatedTask();
+                a++;
+                final Integer number=a;
+                uiHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //txtResult.setText(result);
+                        clock.setText(number.toString());
+                    }
+                });
             }
-        };
-        MyApplication application = (MyApplication) getActivity().getApplication();
-        application.setTimer(timerListener);
+        }, 0L, 60L * 10); // интервал - 60000 миллисекунд, 0 миллисекунд до первого запуска.
     }
 }
