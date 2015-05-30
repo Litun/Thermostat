@@ -65,40 +65,5 @@ public class CurrentTemperatureFragment extends Fragment {
         mFahrenheitText = (TemperatureTextView) view.findViewById(R.id.main_fahrenheit);
         mFahrenheitText.setFahrenheit(true);
         mFahrenheitText.setTemperature(mCelsiusText);
-
-        //timer
-        final TextView clock = (TextView) view.findViewById(R.id.clock);
-//
-//        TimerListener timerListener = new TimerListener() {
-//            @Override
-//            synchronized
-//            public void timeChanged(Date time) {
-//                SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
-//                clock.setText(dateFormatter.format(time));
-//            }
-//        };
-//        MyApplication application = (MyApplication) getActivity().getApplication();
-//        application.setTimer(timerListener);
-
-        Timer myTimer = new Timer(); // Создаем таймер
-        final Handler uiHandler = new Handler();
-        //final TextView txtResult = (TextView)view.findViewById(R.id.txtResult);
-        myTimer.schedule(new TimerTask() { // Определяем задачу
-            Integer a = 0;
-
-            @Override
-            public void run() {
-                //final String result = doLongAndComplicatedTask();
-                a++;
-                final Integer number=a;
-                uiHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //txtResult.setText(result);
-                        clock.setText(number.toString());
-                    }
-                });
-            }
-        }, 0L, 60L * 10); // интервал - 60000 миллисекунд, 0 миллисекунд до первого запуска.
     }
 }

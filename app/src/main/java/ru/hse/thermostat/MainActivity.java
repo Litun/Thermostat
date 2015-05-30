@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -63,7 +71,32 @@ public class MainActivity extends AppCompatActivity {
             selectItem(0);
         }
 
+        startClock();
+    }
 
+    private void startClock() {
+        final SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
+        //timer
+        final TextView clock = (TextView) findViewById(R.id.clock);
+        Timer myTimer = new Timer(); // Создаем таймер
+        final Handler uiHandler = new Handler();
+        myTimer.schedule(new TimerTask() { // Определяем задачу
+            Calendar calendar = Calendar.getInstance();
+
+            @Override
+            public void run() {
+                //final String result = doLongAndComplicatedTask();
+                calendar.add(Calendar.MINUTE, 5);
+                final Date time = calendar.getTime();
+                uiHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //txtResult.setText(result);
+                        clock.setText(dateFormatter.format(time));
+                    }
+                });
+            }
+        }, 0L, 100L); // интервал - 60000 миллисекунд, 0 миллисекунд до первого запуска.
     }
 
 //    @Override
@@ -98,7 +131,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /** Swaps fragments in the main content view */
+    /**
+     * Swaps fragments in the main content view
+     */
     private void selectItem(int position) {
         // Update the main content by replacing fragments
         Fragment fragment = null;
