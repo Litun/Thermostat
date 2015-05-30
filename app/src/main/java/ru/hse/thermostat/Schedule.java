@@ -1,6 +1,8 @@
 package ru.hse.thermostat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -13,13 +15,17 @@ public class Schedule {
     public Schedule() {
         //long days = TimeUnit.MILLISECONDS.toDays(milliseconds);
         storage = new ArrayList<Interval>(5);
-        storage.add(new Interval(0,60,70));
-        storage.add(new Interval(1,60,70));
-        storage.add(new Interval(1,160,170));
+        storage.add(new Interval(0, 60, 70));
+        storage.add(new Interval(1, 60, 70));
+        storage.add(new Interval(1, 160, 170));
     }
 
     public List<Interval> getStorage() {
         return storage;
+    }
+
+    public Interval getInterval(int i) {
+        return storage.get(i);
     }
 
     public int size() {
@@ -28,27 +34,43 @@ public class Schedule {
 
     static class Interval {
         final int weekday;
-        long minutesFrom,
-                minutesTo;
+        Date from, to;
         boolean active = true;
 
         Interval(int weekday, long minutesFrom, long minutesTo) {
             this.weekday = weekday;
-            this.minutesFrom = minutesFrom;
-            this.minutesTo = minutesTo;
+            from = new Date(TimeUnit.MINUTES.toMillis(minutesFrom));
+            to = new Date(TimeUnit.MINUTES.toMillis(minutesTo));
         }
 
-        long getMinutesFrom(){
-            return TimeUnit.MINUTES.toMinutes(minutesFrom);
+
+        Interval(int weekday, Date from, Date to) {
+            this.weekday = weekday;
+            this.from = from;
+            this.to = to;
         }
-        long getHoursFrom(){
-            return TimeUnit.MINUTES.toHours(minutesFrom);
-        }
-        long getMinutesTo(){
-            return TimeUnit.MINUTES.toMinutes(minutesTo);
-        }
-        long getHoursTo(){
-            return TimeUnit.MINUTES.toHours(minutesTo);
+
+//        long getMinutesFrom() {
+//            return from.getTime();
+//        }
+//
+//        long getHoursFrom() {
+//            return TimeUnit.MINUTES.toHours(minutesFrom);
+//        }
+//
+//        long getMinutesTo() {
+//            return minutesTo % 60;
+//        }
+//
+//        long getHoursTo() {
+//            return TimeUnit.MINUTES.toHours(minutesTo);
+//        }
+
+        @Override
+        public String toString() {
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
+            return dateFormatter.format(from) + " - " +
+                    dateFormatter.format(to);
         }
     }
 }

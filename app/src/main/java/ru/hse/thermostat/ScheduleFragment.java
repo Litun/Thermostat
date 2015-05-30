@@ -40,15 +40,18 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+        return view;
+    }
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_schedule);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        recyclerView = (RecyclerView) getView().findViewById(R.id.recycler_schedule);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         //init adapter
         ScheduleAdapter adapter = new ScheduleAdapter(schedule);
         recyclerView.setAdapter(adapter);
-
-        return view;
     }
 
     public void onButtonPressed(Uri uri) {

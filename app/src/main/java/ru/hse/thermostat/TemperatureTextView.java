@@ -25,10 +25,6 @@ public class TemperatureTextView extends TextView {
         super(context, attrs, defStyleAttr);
     }
 
-    public TemperatureTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     public boolean isFahrenheit() {
         return fahrenheit;
     }

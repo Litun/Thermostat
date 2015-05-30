@@ -40,7 +40,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Interv
 
     @Override
     public void onBindViewHolder(IntervalViewHolder holder, int position) {
-        holder.text.setText("[eqhghj");
+        holder.text.setText(schedule.getInterval(position).toString());
     }
 
     @Override
@@ -48,6 +48,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Interv
         return schedule.size();
     }
 
-
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 }
 

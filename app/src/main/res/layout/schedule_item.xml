@@ -2,7 +2,8 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardview_interval"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/just_dimention">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,17 +11,27 @@
         android:orientation="horizontal">
 
         <TextView
-
             android:id="@+id/text_interval"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="до 11, хуле" />
+            android:layout_weight="4"
+            android:layout_margin="@dimen/just_dimention"
+            android:gravity="center"
+            android:textSize="@dimen/abc_text_size_title_material"
+            android:text="11:00am - 2:50pm" />
 
-        <Switch
-            android:id="@+id/switch_interval"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Switch
+                android:id="@+id/switch_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
 
 
     </LinearLayout>
