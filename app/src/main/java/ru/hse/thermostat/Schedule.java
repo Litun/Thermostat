@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -14,18 +15,21 @@ import java.util.concurrent.TimeUnit;
  * Created by Litun on 28.05.2015.
  */
 public class Schedule {
+    final private int DAY_LIMIT = 5;
+
     final private List<Interval> storage;
+    final private int[] dayCount = new int[7];
 
     public Schedule() {
         //long days = TimeUnit.MILLISECONDS.toDays(milliseconds);
         storage = new ArrayList<Interval>(5);
 
-        storage.add(new Interval(0, 60, 70));
-        storage.add(new Interval(1, 60, 70));
-        storage.add(new Interval(1, 600, 610, false));
-        storage.add(new Interval(3, 60, 70));
-        storage.add(new Interval(4, 60, 70, false));
-        storage.add(new Interval(5, 280, 1210));
+        addInterval(new Interval(0, 60, 70));
+        addInterval(new Interval(1, 60, 70));
+        addInterval(new Interval(1, 600, 610, false));
+        addInterval(new Interval(3, 60, 70));
+        addInterval(new Interval(4, 60, 70, false));
+        addInterval(new Interval(5, 280, 1210));
 
         goodStorage(storage);
     }
@@ -46,7 +50,15 @@ public class Schedule {
         return storage.get(i);
     }
 
-    public void addInterval(Interval interval) { storage.add(interval); goodStorage(storage); }
+    public void addInterval(Interval interval)
+    {
+        if (dayCount[interval.weekday] < DAY_LIMIT) {
+            storage.add(interval);
+            dayCount[interval.weekday]++;
+            goodStorage(storage);
+        }
+    }
+
     public void add(int weekday, Date from, Date to) { addInterval(new Interval(weekday, from, to)); }
 
     public boolean isChecked(int i) {
@@ -54,6 +66,7 @@ public class Schedule {
     }
 
     public void remove(int i) {
+        dayCount[storage.get(i).weekday]--;
         storage.remove(i);
     }
 
@@ -172,10 +185,17 @@ public class Schedule {
 //            return TimeUnit.MINUTES.toHours(minutesTo);
 //        }
 
+        private String weekdayToString(int weekday) {
+            String[] dayString = new String[]{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+            return dayString[weekday];
+        }
+
         @Override
         public String toString() {
             SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
-            return dateFormatter.format(from) + " - " +
+            return weekdayToString(weekday) + ", " +
+                    dateFormatter.format(from) + " - " +
                     dateFormatter.format(to);
         }
     }
