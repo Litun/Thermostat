@@ -41,6 +41,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Interv
     @Override
     public void onBindViewHolder(IntervalViewHolder holder, int position) {
         holder.text.setText(schedule.getInterval(position).toString());
+        holder.switchView.setChecked(schedule.isChecked(position));
     }
 
     @Override

@@ -17,7 +17,10 @@ public class Schedule {
         storage = new ArrayList<Interval>(5);
         storage.add(new Interval(0, 60, 70));
         storage.add(new Interval(1, 60, 70));
-        storage.add(new Interval(1, 160, 170));
+        storage.add(new Interval(1, 600, 610, false));
+        storage.add(new Interval(3, 60, 70));
+        storage.add(new Interval(4, 60, 70, false));
+        storage.add(new Interval(5, 280, 1210));
     }
 
     public List<Interval> getStorage() {
@@ -26,6 +29,14 @@ public class Schedule {
 
     public Interval getInterval(int i) {
         return storage.get(i);
+    }
+
+    public boolean isChecked(int i) {
+        return storage.get(i).active;
+    }
+
+    public void remove(int i){
+        storage.remove(i);
     }
 
     public int size() {
@@ -43,6 +54,12 @@ public class Schedule {
             to = new Date(TimeUnit.MINUTES.toMillis(minutesTo));
         }
 
+        Interval(int weekday, long minutesFrom, long minutesTo, boolean isActive) {
+            this.weekday = weekday;
+            from = new Date(TimeUnit.MINUTES.toMillis(minutesFrom));
+            to = new Date(TimeUnit.MINUTES.toMillis(minutesTo));
+            active = isActive;
+        }
 
         Interval(int weekday, Date from, Date to) {
             this.weekday = weekday;

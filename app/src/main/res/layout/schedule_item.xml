@@ -3,7 +3,7 @@
     android:id="@+id/cardview_interval"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/just_dimention">
+    android:layout_margin="@dimen/just_dimention">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,8 @@
                 android:id="@+id/switch_interval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:checked="false" />
         </FrameLayout>
 
 
