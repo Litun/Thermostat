@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Asus on 30.05.2015.
  */
 public class Timer implements Runnable {
-    private final long step = 5000;
+    private final long step = 300 * 1000;
 
     private final TimerListener listener;
     private Date time;
