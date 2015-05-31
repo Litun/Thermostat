@@ -143,7 +143,7 @@ public class Schedule {
                     return interval.from;
                 }
 
-                if ((interval.weekday == DateDay) && (date.before(interval.from)) {
+                if ((interval.weekday == DateDay) && (date.before(interval.from))) {
                     return interval.from;
                 }
             }
