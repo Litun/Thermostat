@@ -60,6 +60,8 @@ public class Schedule {
     }
 
     public void add(int weekday, Date from, Date to) {
+        from.setTime(from.getTime() % (1000 * 60 * 60 * 24));
+        to.setTime(to.getTime() % (1000 * 60 * 60 * 24));
         addInterval(new Interval(weekday, from, to));
     }
 
@@ -118,7 +120,6 @@ public class Schedule {
     }
 
     private void goodStorage(List<Interval> storage) {
-        removeIntersections(storage);
         Collections.sort(storage);
     }
 
