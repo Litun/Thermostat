@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ public class AddIntervalActivity extends AppCompatActivity {
 
     Calendar from,
             to;
-    List<Integer> weekdays = new ArrayList<Integer>(3);
+    List<Integer> weekdaysList = new ArrayList<Integer>(3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +43,14 @@ public class AddIntervalActivity extends AppCompatActivity {
                     @Override
                     public void onWeekdaysPicked(boolean[] checkedItems) {
                         String s = "";
+                        weekdaysList.clear();
                         for (int i = 0; i < weekdays.length; i++) {
-                            if (checkedItems[i])
+                            if (checkedItems[i]) {
                                 s += weekdays[i] + "\n";
+                                weekdaysList.add(i);
+                            }
                         }
-                        s = s.substring(0, s.length()-1);
+                        s = s.substring(0, s.length() - 1);
                         weekDay.setText(s);
                     }
                 });
@@ -88,6 +92,25 @@ public class AddIntervalActivity extends AppCompatActivity {
                     }
                 });
                 newFragment.show(getSupportFragmentManager(), "timePicker");
+            }
+        });
+
+        //close button
+        ImageView close = (ImageView) findViewById(R.id.close_button);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddIntervalActivity.this.finish();
+            }
+        });
+
+        //ok button
+        ImageView ok = (ImageView) findViewById(R.id.ok_button);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyApplication application = (MyApplication) getApplication();
+                application.getSchedule().add(weekdaysList , from.getTime(), to.getTime());
             }
         });
     }

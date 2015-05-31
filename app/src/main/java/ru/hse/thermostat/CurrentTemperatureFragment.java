@@ -3,15 +3,10 @@ package ru.hse.thermostat;
 import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 /**
@@ -65,5 +60,7 @@ public class CurrentTemperatureFragment extends Fragment {
         mFahrenheitText = (TemperatureTextView) view.findViewById(R.id.main_fahrenheit);
         mFahrenheitText.setFahrenheit(true);
         mFahrenheitText.setTemperature(mCelsiusText);
+
+        //AlertDialog.Builder adb = new AlertDialog.Builder(getActivity()).set
     }
 }
