@@ -122,8 +122,8 @@ public class Schedule {
         date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
 
             for (Interval interval : storage) {
-                if (interval.weekday == DateDay) {
-                    if (interval.active && date.after(interval.from) && date.before(interval.to)) {
+                if (interval.active && (interval.weekday == DateDay)) {
+                    if (date.after(interval.from) && date.before(interval.to)) {
                         return true;
                     }
                 }
@@ -138,12 +138,12 @@ public class Schedule {
         date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
 
         for (Interval interval : storage) {
-            if (interval.active && (interval.weekday > DateDay)) {
-                return interval.from;
-            }
+            if (interval.active) {
+                if (interval.weekday > DateDay) {
+                    return interval.from;
+                }
 
-            if (interval.weekday == DateDay) {
-                if (interval.active && date.before(interval.from)) {
+                if ((interval.weekday == DateDay) && (date.before(interval.from)) {
                     return interval.from;
                 }
             }
