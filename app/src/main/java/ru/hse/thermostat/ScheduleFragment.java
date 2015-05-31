@@ -3,6 +3,7 @@ package ru.hse.thermostat;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,6 +62,13 @@ public class ScheduleFragment extends Fragment {
         //bind plus button
         FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.plus_button);
         fab.attachToRecyclerView(recyclerView);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddIntervalActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setSwipeDel(final ScheduleAdapter adapter) {

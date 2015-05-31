@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startClock() {
-        final SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
+        final SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE hh:mm a");
         //timer
         final TextView clock = (TextView) findViewById(R.id.clock);
         Timer myTimer = new Timer(); // Создаем таймер
