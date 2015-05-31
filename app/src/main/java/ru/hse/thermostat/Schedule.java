@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,12 +22,13 @@ public class Schedule {
         //long days = TimeUnit.MILLISECONDS.toDays(milliseconds);
         storage = new ArrayList<Interval>(5);
 
-        addInterval(new Interval(0, 60, 70));
-        addInterval(new Interval(1, 60, 70));
-        addInterval(new Interval(1, 600, 610, false));
-        addInterval(new Interval(3, 60, 70));
-        addInterval(new Interval(4, 60, 70, false));
-        addInterval(new Interval(5, 280, 1210));
+        addInterval(new Interval(0, 600, 1000));
+        addInterval(new Interval(1, 600, 1000));
+        addInterval(new Interval(2, 600, 1000, false));
+        addInterval(new Interval(3, 600, 1000));
+        addInterval(new Interval(4, 600, 1100, false));
+        addInterval(new Interval(5, 600, 1200));
+        addInterval(new Interval(5, 660, 1100, false));
 
         goodStorage(storage);
     }

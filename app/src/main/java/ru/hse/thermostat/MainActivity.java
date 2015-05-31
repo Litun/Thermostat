@@ -26,6 +26,10 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final Temperature dayTemperature = new Temperature(),
+            nightTemperature = new Temperature();
+    Date currentTime=Calendar.getInstance().getTime();
+
     private String[] mScreenTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -38,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO: Temperatures
+        dayTemperature.setCelsius(22.1f);
+        nightTemperature.setCelsius(19.7f);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -93,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         //txtResult.setText(result);
                         clock.setText(dateFormatter.format(time));
+                        currentTime = time;
                     }
                 });
             }
@@ -187,6 +196,12 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    Temperature getCurrentTemperature() {
+        MyApplication application = (MyApplication) getApplication();
+
+        return application.getSchedule().isActive(currentTime) ? dayTemperature : nightTemperature;
     }
 
 }
