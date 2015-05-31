@@ -60,6 +60,7 @@ public class Schedule {
     }
 
     public void add(int weekday, Date from, Date to) { addInterval(new Interval(weekday, from, to)); }
+    public void add(List<Integer> weekdays, Date from, Date to) { for (Integer weekday : weekdays) { add(weekday, from, to); } }
 
     public boolean isChecked(int i) {
         return storage.get(i).active;
@@ -115,6 +116,49 @@ public class Schedule {
         removeIntersections(storage);
         Collections.sort(storage);
     }
+
+    public boolean isActive(Date date)
+    {
+        long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
+        date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
+
+            for (Interval interval : storage) {
+                if (interval.active && (interval.weekday == DateDay)) {
+                    if (date.after(interval.from) && date.before(interval.to)) {
+                        return true;
+                    }
+                }
+            }
+
+        return false;
+    }
+
+    public Date getNextChange(Date date)
+    {
+        long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
+        date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
+
+        for (Interval interval : storage) {
+            if (interval.active) {
+                if (interval.weekday > DateDay) {
+                    return interval.from;
+                }
+
+                if ((interval.weekday == DateDay) && (date.before(interval.from))) {
+                    return interval.from;
+                }
+            }
+        }
+
+        for (Interval interval : storage) {
+            if (interval.active) {
+                return interval.from;
+            }
+        }
+
+        return null;
+    }
+
 
     static class Interval implements Comparable<Interval> {
         final int weekday;
