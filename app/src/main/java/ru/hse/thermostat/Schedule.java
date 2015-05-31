@@ -60,6 +60,7 @@ public class Schedule {
     }
 
     public void add(int weekday, Date from, Date to) { addInterval(new Interval(weekday, from, to)); }
+    public void add(List<Integer> weekdays, Date from, Date to) { for (Integer weekday : weekdays) { add(weekday, from, to); } }
 
     public boolean isChecked(int i) {
         return storage.get(i).active;
