@@ -132,7 +132,7 @@ public class Schedule {
         return false;
     }
 
-    public Date nextChange(Date date)
+    public Date getNextChange(Date date)
     {
         long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
         date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
