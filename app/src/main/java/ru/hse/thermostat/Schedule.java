@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -49,8 +51,7 @@ public class Schedule {
         return storage.get(i);
     }
 
-    public void addInterval(Interval interval)
-    {
+    public void addInterval(Interval interval) {
         if (dayCount[interval.weekday] < DAY_LIMIT) {
             storage.add(interval);
             dayCount[interval.weekday]++;
@@ -58,8 +59,15 @@ public class Schedule {
         }
     }
 
-    public void add(int weekday, Date from, Date to) { addInterval(new Interval(weekday, from, to)); }
-    public void add(List<Integer> weekdays, Date from, Date to) { for (Integer weekday : weekdays) { add(weekday, from, to); } }
+    public void add(int weekday, Date from, Date to) {
+        addInterval(new Interval(weekday, from, to));
+    }
+
+    public void add(List<Integer> weekdays, Date from, Date to) {
+        for (Integer weekday : weekdays) {
+            add(weekday, from, to);
+        }
+    }
 
     public boolean isChecked(int i) {
         return storage.get(i).active;
@@ -79,8 +87,7 @@ public class Schedule {
         return storage.size();
     }
 
-    private void removeIntersections(List<Interval> storage)
-    {
+    private void removeIntersections(List<Interval> storage) {
         boolean[] used = new boolean[storage.size()];
 
         for (int i = 0; i < storage.size(); i++) {
@@ -110,30 +117,27 @@ public class Schedule {
         }
     }
 
-    private void goodStorage(List<Interval> storage)
-    {
+    private void goodStorage(List<Interval> storage) {
         removeIntersections(storage);
         Collections.sort(storage);
     }
 
-    public boolean isActive(Date date)
-    {
+    public boolean isActive(Date date) {
         long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
         date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
 
-            for (Interval interval : storage) {
-                if (interval.active && (interval.weekday == DateDay)) {
-                    if (date.after(interval.from) && date.before(interval.to)) {
-                        return true;
-                    }
+        for (Interval interval : storage) {
+            if (interval.active && (interval.weekday == DateDay)) {
+                if (date.after(interval.from) && date.before(interval.to)) {
+                    return true;
                 }
             }
+        }
 
         return false;
     }
 
-    public Date getNextChange(Date date)
-    {
+    public Date getNextChange(Date date) {
         long DateDay = (date.getTime() / (1000 * 60 * 60 * 24) % 7);
         date.setTime(date.getTime() % (1000 * 60 * 60 * 24));
 
@@ -165,9 +169,13 @@ public class Schedule {
         boolean active = true;
 
         Interval(int weekday, long minutesFrom, long minutesTo) {
+            Calendar calendarFrom = new GregorianCalendar(2015, 5, 31 + weekday, (int) minutesFrom / 60, (int)minutesFrom % 60);
+
+            Calendar calendarTo = new GregorianCalendar(2015, 5, 31 + weekday, (int) minutesTo / 60, (int)minutesTo % 60);
+
             this.weekday = weekday;
-            from = new Date(TimeUnit.MINUTES.toMillis(minutesFrom));
-            to = new Date(TimeUnit.MINUTES.toMillis(minutesTo));
+            from = calendarFrom.getTime();
+            to = calendarTo.getTime();
         }
 
         Interval(int weekday, long minutesFrom, long minutesTo, boolean isActive) {
@@ -183,8 +191,10 @@ public class Schedule {
             this.to = to;
         }
 
-        public static boolean intersect(Interval interval1, Interval interval2)  {
-            if (interval1.weekday != interval2.weekday) { return false; }
+        public static boolean intersect(Interval interval1, Interval interval2) {
+            if (interval1.weekday != interval2.weekday) {
+                return false;
+            }
 
             Date maxFrom, minTo, maxTo;
             maxFrom = interval1.from.after(interval2.from) ? interval1.from : interval2.from;
@@ -206,8 +216,7 @@ public class Schedule {
         public int compareTo(Interval interval) {
             if (this.weekday == interval.weekday) {
                 return this.from.compareTo(interval.from);
-            }
-            else {
+            } else {
                 return this.weekday - interval.weekday;
             }
         }

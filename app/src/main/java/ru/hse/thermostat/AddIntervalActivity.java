@@ -111,6 +111,7 @@ public class AddIntervalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MyApplication application = (MyApplication) getApplication();
                 application.getSchedule().add(weekdaysList , from.getTime(), to.getTime());
+                AddIntervalActivity.this.finish();
             }
         });
     }
