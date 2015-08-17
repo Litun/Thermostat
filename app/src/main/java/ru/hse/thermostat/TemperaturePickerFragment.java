@@ -16,6 +16,11 @@ import android.widget.SeekBar;
 public class TemperaturePickerFragment extends DialogFragment {
 
     Temperature temperature = new Temperature();
+    TemperaturePickedListener listener;
+
+    public TemperaturePickerFragment(TemperaturePickedListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -37,7 +42,7 @@ public class TemperaturePickerFragment extends DialogFragment {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //mListener.onWeekdaysPicked(mCheckedItems);
+                        listener.onTemperaturePicked(temperature);
                     }
                 })
                 .setView(view);
@@ -77,5 +82,9 @@ public class TemperaturePickerFragment extends DialogFragment {
         });
 
         return builder.create();
+    }
+
+    public interface TemperaturePickedListener {
+        void onTemperaturePicked(Temperature temperature);
     }
 }

@@ -2,6 +2,8 @@ package ru.hse.thermostat;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final Temperature dayTemperature = new Temperature(),
             nightTemperature = new Temperature();
-    Date currentTime=Calendar.getInstance().getTime();
+    Date currentTime = Calendar.getInstance().getTime();
 
     private String[] mScreenTitles;
     private DrawerLayout mDrawerLayout;
@@ -43,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO: Temperatures
-        dayTemperature.setCelsius(22.1f);
-        nightTemperature.setCelsius(19.7f);
+        loadTemperatures();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -82,13 +82,43 @@ public class MainActivity extends AppCompatActivity {
         startClock();
     }
 
+    public final String PREF_NAME = "Thermostat",
+            TEMP_KEY_1 = "temperature1",
+            TEMP_KEY_2 = "temperature2";
+
+    private void loadTemperatures() {
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        Float temp1 = preferences.getFloat(TEMP_KEY_1, -1f);
+        Float temp2 = preferences.getFloat(TEMP_KEY_2, -1f);
+
+        if (temp1 < 0 || temp2 < 0) {
+            dayTemperature.setCelsius(23.1f);
+            nightTemperature.setCelsius(17.7f);
+        } else {
+            dayTemperature.setCelsius(temp1);
+            nightTemperature.setCelsius(temp2);
+        }
+    }
+
+    private void saveTemperatures(){
+        SharedPreferences preferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        preferences.edit().putFloat(TEMP_KEY_1, dayTemperature.getCelsius()).apply();
+        preferences.edit().putFloat(TEMP_KEY_2, nightTemperature.getCelsius()).apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveTemperatures();
+    }
+
     private void startClock() {
         final SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE hh:mm a");
         //timer
         final TextView clock = (TextView) findViewById(R.id.clock);
-        Timer myTimer = new Timer(); // Создаем таймер
+        Timer myTimer = new Timer(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         final Handler uiHandler = new Handler();
-        myTimer.schedule(new TimerTask() { // Определяем задачу
+        myTimer.schedule(new TimerTask() { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             Calendar calendar = Calendar.getInstance();
 
             @Override
@@ -105,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        }, 0L, 100L); // интервал - 60000 миллисекунд, 0 миллисекунд до первого запуска.
+        }, 0L, 100L); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - 60000 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, 0 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     }
 
 //    @Override
@@ -126,10 +156,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return mDrawerToggle.onOptionsItemSelected(item) ||
+                super.onOptionsItemSelected(item);
     }
 
     /* The click listener for ListView in the navigation drawer */

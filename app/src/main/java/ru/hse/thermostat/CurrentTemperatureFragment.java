@@ -65,16 +65,30 @@ public class CurrentTemperatureFragment extends Fragment {
         mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new TemperaturePickerFragment();
+                DialogFragment newFragment = new TemperaturePickerFragment(new TemperaturePickerFragment.TemperaturePickedListener() {
+                    @Override
+                    public void onTemperaturePicked(Temperature temperature) {
+                        setCurrentTemperature(temperature);
+                        refrashCard();
+                    }
+                });
                 newFragment.show(getFragmentManager().beginTransaction(), "timePicker");
             }
         });
         startUpdateTemperature();
     }
 
-    void refrashCard(){
-        MainActivity activity=(MainActivity)getActivity();
-        if (activity!=null) {
+    void setCurrentTemperature(Temperature temperature) {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            Temperature t = activity.getCurrentTemperature();
+            t.setCelsius(temperature.getCelsius());
+        }
+    }
+
+    void refrashCard() {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
             Temperature t = activity.getCurrentTemperature();
 
             mCelsiusText = (TemperatureTextView) getView().findViewById(R.id.main_celsius);
